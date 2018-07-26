@@ -1,5 +1,6 @@
 package com.disney.studios;
 
+import org.slf4j.Logger;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -11,14 +12,13 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-/**
- * Loads stored objects from the file system and builds up
- * the appropriate objects to add to the data source.
- *
- * Created by fredjean on 9/21/15.
- */
+import static org.slf4j.LoggerFactory.getLogger;
+
 @Component
 public class PetLoader implements InitializingBean {
+
+    private static final Logger LOGGER = getLogger(PetLoader.class);
+
     // Resources to the different files we need to load.
     @Value("classpath:data/labrador.txt")
     private Resource labradors;
@@ -57,13 +57,12 @@ public class PetLoader implements InitializingBean {
      * @throws IOException In case things go horribly, horribly wrong.
      */
     private void loadBreed(String breed, Resource source) throws IOException {
+        LOGGER.debug("Loading breed {}", breed);
         try ( BufferedReader br = new BufferedReader(new InputStreamReader(source.getInputStream()))) {
             String line;
             while ((line = br.readLine()) != null) {
-                System.out.println(line);
-                /* TODO: Create appropriate objects and save them to
-                 *       the datasource.
-                 */
+                LOGGER.debug(line);
+                // TODO: Create appropriate objects and save them to the datasource.
             }
         }
     }
