@@ -33,7 +33,13 @@ in memory HSQLDB to store the results. Jackson is already included to provide JS
 
 The Spring Boot Started Test module is included to facilitate both unit and integration tests.
 
-Feel free to pick a different framework if you feel more comfortable doing so.
+Please follow these steps:
+
+* Clone api_challenge to your local workstation.
+* Follow the instructions on the home page of your private repository to initialize it on your local workstation.
+* Copy the code from the local copy of api_challenge to initialize your private repository.
+* Push the copied code to the remote of your private repository.
+* Push your edits to your private repository as you go
 
 ## Dependencies
 
@@ -43,7 +49,7 @@ Feel free to pick a different framework if you feel more comfortable doing so.
 ## Checking Out the Project
 
 ```
-$ git clone https://gitlab.com/coding_challenge_backend/api_challenge
+$ git clone https://gitlab.com/disney-vincentbenjamin/api_challenge.git
 ```
 
 ## Building
@@ -78,9 +84,9 @@ While this falls outside of the challenge, please consider the following as you 
 
 # Submitting the Project
 
-Please send us a zip file of your challenge when completed.
+You will also receive an invitation to your own private repository on gitlab.com. Push your code to that repository as you go. Instructions are provided by gitlab.com on how to push your code to a new repo.
 
 # Duration
 
-You will have until the end of the day to complete the challenge. In our tests, we found it to takes about 4-6 hours to build.
- We encourage you to spend any leftover time to polish/document/test your app.
+In our tests, we found it to take us about 4 hours to build.  We encourage you to spend enough time to polish/document/test your app. Commit times will be considered when ranking your solutions but meeting all requirements is paramount.  Please email us when all requirements are met.
+The timestamp of your last commit will be used to gage how long you worked on this project.
