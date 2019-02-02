@@ -31,7 +31,7 @@ Each client is allowed to vote once for any particular dog picture.
 We provide you with a starter Spring Boot project. The project is already configured go use Spring MVC and talks to an 
 in memory HSQLDB to store the results. Jackson is already included to provide JSON serialization and deserialization.
 
-The Spring Boot Started Test module is included to facilitate both unit and integration tests.
+The Spring Boot Starter Test module is included to facilitate both unit and integration tests.
 
 Please follow these steps:
 
@@ -88,5 +88,5 @@ You will also receive an invitation to your own private repository on gitlab.com
 
 # Duration
 
-In our tests, we found it to take us about 4 hours to build.  We encourage you to spend enough time to polish/document/test your app. Commit times will be considered when ranking your solutions but meeting all requirements is paramount.  Please email us when all requirements are met.
+In our tests, we found it to take us about 4 to 6 hours to build, however, we encourage you to spend enough time to polish/document/test your app. Commit times will be considered when ranking your solutions but meeting all requirements is paramount.  Please email us when all requirements are met.
 The timestamp of your last commit will be used to gage how long you worked on this project.
