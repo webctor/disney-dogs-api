@@ -120,6 +120,15 @@ While this falls outside of the challenge, please consider the following as you 
 * How would you configure the app as it goes from dev, to qa and finally to production?
 * How would you insulate the app from a downstream API if it had one.
 
+# Running the Test Cases
+
+This project has added support for Cucumber. The features requested in the requirements section have been defined using Gherkin Syntax inside `src/test/resources/features` folder. 
+
+In order to run the test cases, you can run: 
+```
+$ mvn clean install -Pintegration
+```
+
 # Submitting the Project
 
 You will also receive an invitation to your own private repository on gitlab.com. Push your code to that repository as you go. Instructions are provided by gitlab.com on how to push your code to a new repo.
