@@ -72,6 +72,44 @@ or you can run the jar file from the build:
 $ java -jar target/api_interview-0.1.0.jar
 ```
 
+## Running in a Container
+
+As you can see, the Dockerfile contains the information needed to create an image and running it. This is great since it allows us to test that the application runs regardless of our environment setup. 
+
+Dockerfile is where we define the docker image and specify all the configurations required to run the app.
+
+To build the image you can run:
+ 
+```
+$ docker build -t hacosta-apichallenge .
+```
+
+You can now see the list of all the docker images on your system using the following command: 
+
+```
+$ docker image ls 
+```
+
+
+Once the image has been build, you can run the application:
+ 
+```
+$ docker run -p 8080:8080 hacosta-apichallenge 
+```
+
+You can start the container in the background using detached mode. When you run: 
+
+```
+$ docker run -d -p 8080:8080 hacosta-apichallenge
+```
+
+This gives you the container ID. You can see a list of your containers by running: 
+
+```
+$ docker container ls
+```
+
+
 # Build, Deployment and Running
 
 While this falls outside of the challenge, please consider the following as you get ready to discuss your solution with the team:
