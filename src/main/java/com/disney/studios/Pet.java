@@ -28,6 +28,13 @@ public class Pet {
         this.picture = picture;
     }
 
+    public Pet(Long id, String breed, String picture, int votes) {
+        this.breed = breed;
+        this.picture = picture;
+        this.id = id;
+        this.votes = votes;
+    }
+
     public Long getId() {
         return id;
     }

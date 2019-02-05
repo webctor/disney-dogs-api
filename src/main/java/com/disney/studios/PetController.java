@@ -6,8 +6,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 /**
@@ -29,7 +31,8 @@ public class PetController {
         List<Pet> pets = petService.retrievePets();
 
         Map<String, List<Pet>> groupByBreed =
-                pets.stream().collect(Collectors.groupingBy(Pet::getBreed));
+                pets.stream().sorted(Comparator.comparingInt(Pet::getVotes)).collect(Collectors.groupingBy(Pet::getBreed));
+
 
         if (breed != null) {
             breed = breed.toLowerCase();
@@ -42,7 +45,12 @@ public class PetController {
 
     @GetMapping("/dogs/{id}")
     public ResponseEntity<Object> getPet(@PathVariable(name="id") Long id) {
-        return ResponseEntity.ok(petService.getPet(id));
+        try {
+            return ResponseEntity.ok(petService.getPet(id));
+        } catch (NoSuchElementException nse) {
+            return ResponseEntity.badRequest().build();
+        }
+
     }
 
     @PostMapping("/dogs")
