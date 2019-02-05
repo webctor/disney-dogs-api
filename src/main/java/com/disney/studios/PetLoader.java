@@ -5,12 +5,19 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.client.ClientHttpRequestFactory;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestTemplate;
 
 import javax.sql.DataSource;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
@@ -33,7 +40,7 @@ public class PetLoader implements InitializingBean {
     private Resource yorkies;
 
     @Autowired
-    DataSource dataSource;
+    private PetService petService;
 
     /**
      * Load the different breeds into the data source after
@@ -61,9 +68,11 @@ public class PetLoader implements InitializingBean {
         try ( BufferedReader br = new BufferedReader(new InputStreamReader(source.getInputStream()))) {
             String line;
             while ((line = br.readLine()) != null) {
-                LOGGER.debug(line);
-                // TODO: Create appropriate objects and save them to the datasource.
+                LOGGER.info(line);
+                petService.savePet(new Pet(breed, line));
             }
         }
     }
+
+
 }

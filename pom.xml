@@ -65,6 +65,11 @@
             <version>1.2.4</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.vaadin.external.google</groupId>
+            <artifactId>android-json</artifactId>
+            <version>RELEASE</version>
+        </dependency>
 
 
     </dependencies>
