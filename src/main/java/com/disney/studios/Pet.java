@@ -45,11 +45,11 @@ public class Pet {
     }
 
     public String getBreed() {
-        return breed;
+        return breed.toLowerCase();
     }
 
     public void setBreed(String breed) {
-        this.breed = breed;
+        this.breed = breed.toLowerCase();
     }
 
     public int getVotes() {

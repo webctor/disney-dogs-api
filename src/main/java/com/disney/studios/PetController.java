@@ -24,21 +24,25 @@ public class PetController {
     }
 
     @GetMapping("/dogs/pictures")
-    public ResponseEntity<Object> getDogPictures() {
+    public ResponseEntity<Object> getDogPictures(@RequestParam(required = false) String breed) {
 
         List<Pet> pets = petService.retrievePets();
 
         Map<String, List<Pet>> groupByBreed =
                 pets.stream().collect(Collectors.groupingBy(Pet::getBreed));
 
-        System.out.println(groupByBreed);
+        if (breed != null) {
+            breed = breed.toLowerCase();
+            return ResponseEntity.ok(groupByBreed.get(breed));
+        } else {
+            return ResponseEntity.ok(groupByBreed);
+        }
 
-        return ResponseEntity.ok(groupByBreed);
     }
 
-    @GetMapping("/dogs/pictures/{id}")
-    public Pet getPet(@PathVariable(name="id") Long id) {
-        return petService.getPet(id);
+    @GetMapping("/dogs/{id}")
+    public ResponseEntity<Object> getPet(@PathVariable(name="id") Long id) {
+        return ResponseEntity.ok(petService.getPet(id));
     }
 
     @PostMapping("/dogs")
@@ -50,15 +54,41 @@ public class PetController {
     @DeleteMapping("/dogs/{id}")
     public void deletePet(@PathVariable(name="id") Long id){
         petService.deletePet(id);
-        System.out.println("Pet Deleted Successfully");
     }
 
     @PutMapping("/dogs/{id}")
-    public void updatePet(@RequestBody Pet pet, @PathVariable(name="id") Long id){
+    public ResponseEntity<Object> updatePet(@RequestBody Pet pet, @PathVariable(name="id") Long id){
         Pet p = petService.getPet(id);
         if(p != null){
             petService.updatePet(pet);
+
         }
+
+        return ResponseEntity.ok(pet);
+
+    }
+
+    @PutMapping("/dogs/{id}/up")
+    public ResponseEntity<Object> updatePetUp(@PathVariable(name="id") Long id){
+        Pet pet = petService.getPet(id);
+        if(pet != null){
+            pet.setVotes(pet.getVotes() + 1);
+            petService.updatePet(pet);
+        }
+
+        return ResponseEntity.ok(pet);
+
+    }
+
+    @PutMapping("/dogs/{id}/down")
+    public ResponseEntity<Object> updatePetDown(@PathVariable(name="id") Long id){
+        Pet pet = petService.getPet(id);
+        if(pet != null && pet.getVotes() > 0){
+            pet.setVotes(pet.getVotes() - 1);
+            petService.updatePet(pet);
+        }
+
+        return ResponseEntity.ok(pet);
 
     }
 
