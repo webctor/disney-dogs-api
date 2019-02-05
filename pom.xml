@@ -41,35 +41,6 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- I like Behavior-Driven Development (BDD)
-        It allows us to define features in Gerkhin syntax that is easily understood by technical and non-technical
-        folks. This way, we don't have "translation" issues in the features being developed.
-        -->
-        <dependency>
-            <groupId>info.cukes</groupId>
-            <artifactId>cucumber-java</artifactId>
-            <version>1.2.4</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>info.cukes</groupId>
-            <artifactId>cucumber-junit</artifactId>
-            <version>1.2.4</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>info.cukes</groupId>
-            <artifactId>cucumber-spring</artifactId>
-            <version>1.2.4</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.vaadin.external.google</groupId>
-            <artifactId>android-json</artifactId>
-            <version>RELEASE</version>
-        </dependency>
 
 
     </dependencies>

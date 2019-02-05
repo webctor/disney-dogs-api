@@ -7,6 +7,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * Created by Hector R Acosta on 2/4/19.
@@ -22,9 +24,16 @@ public class PetController {
     }
 
     @GetMapping("/dogs/pictures")
-    public List<Pet> getDogPictures() {
+    public ResponseEntity<Object> getDogPictures() {
+
         List<Pet> pets = petService.retrievePets();
-        return pets;
+
+        Map<String, List<Pet>> groupByBreed =
+                pets.stream().collect(Collectors.groupingBy(Pet::getBreed));
+
+        System.out.println(groupByBreed);
+
+        return ResponseEntity.ok(groupByBreed);
     }
 
     @GetMapping("/dogs/pictures/{id}")
