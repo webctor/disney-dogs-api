@@ -69,6 +69,8 @@ public class PetLoader implements InitializingBean {
             String line;
             while ((line = br.readLine()) != null) {
                 LOGGER.info(line);
+                // JUST USE THE PETSERVICE TO SAVE THE NEW PET. WE
+                // ADDED THE CONSTRUCTOR AND THE ID IS AUTOGENRATED.
                 petService.savePet(new Pet(breed, line));
             }
         }
