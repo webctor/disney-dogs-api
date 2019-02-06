@@ -1,7 +1,12 @@
 package com.disney.studios;
 
+import com.disney.studios.security.User;
+import com.disney.studios.security.VotedSingleton;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -65,7 +70,20 @@ public class PetController {
     }
 
     @PutMapping("/dogs/{id}")
-    public ResponseEntity<Object> updatePet(@RequestBody Pet pet, @PathVariable(name="id") Long id){
+    public ResponseEntity<Object> updatePet(@RequestBody Pet pet, @PathVariable(name="id") Long id, Authentication authentication){
+
+        String username = authentication.getName();
+
+        VotedSingleton voted = VotedSingleton.getInstance();
+
+        if(voted.map.containsKey(username)) {
+            return ResponseEntity
+                    .status(HttpStatus.FORBIDDEN)
+                    .body("Don't cheat... This is not a backdoor!");
+        } else {
+            voted.map.put(username, new User(username));
+        }
+
         Pet p = petService.getPet(id);
         if(p != null){
             petService.updatePet(pet);
@@ -77,7 +95,20 @@ public class PetController {
     }
 
     @PutMapping("/dogs/{id}/up")
-    public ResponseEntity<Object> updatePetUp(@PathVariable(name="id") Long id){
+    public ResponseEntity<Object> updatePetUp(@PathVariable(name="id") Long id, Authentication authentication){
+
+        String username = authentication.getName();
+
+        VotedSingleton voted = VotedSingleton.getInstance();
+
+        if(voted.map.containsKey(username)) {
+            return ResponseEntity
+                    .status(HttpStatus.FORBIDDEN)
+                    .body("Don't cheat... You already voted!");
+        } else {
+            voted.map.put(username, new User(username));
+        }
+
         Pet pet = petService.getPet(id);
         if(pet != null){
             pet.setVotes(pet.getVotes() + 1);
@@ -89,7 +120,20 @@ public class PetController {
     }
 
     @PutMapping("/dogs/{id}/down")
-    public ResponseEntity<Object> updatePetDown(@PathVariable(name="id") Long id){
+    public ResponseEntity<Object> updatePetDown(@PathVariable(name="id") Long id, Authentication authentication){
+
+        String username = authentication.getName();
+
+        VotedSingleton voted = VotedSingleton.getInstance();
+
+        if(voted.map.containsKey(username)) {
+            return ResponseEntity
+                    .status(HttpStatus.FORBIDDEN)
+                    .body("Don't cheat... You already voted!");
+        } else {
+            voted.map.put(username, new User(username));
+        }
+
         Pet pet = petService.getPet(id);
         if(pet != null && pet.getVotes() > 0){
             pet.setVotes(pet.getVotes() - 1);

@@ -120,6 +120,29 @@ While this falls outside of the challenge, please consider the following as you 
 * How would you configure the app as it goes from dev, to qa and finally to production?
 * How would you insulate the app from a downstream API if it had one.
 
+# How to submit an authenticated request for the voting endpoints
+
+The system uses a basic authentication example for Spring Boot. In particular, it uses the dependency:
+
+In order to exercise that scenario, you can generate a header using a service like this:
+https://www.blitter.se/utils/basic-authentication-header-generator/
+
+The username is 'user' and the password 'password'...
+
+Then, it must be sent as a header. This is how we know if the user has voted already or not. 
+
+```xml
+   <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-config</artifactId>
+   </dependency>
+
+   <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-security</artifactId>
+   </dependency>
+```
+
 # Running the Test Cases
 
 This project has added support for Cucumber. The features requested in the requirements section have been defined using Gherkin Syntax inside `src/test/resources/features` folder. 
